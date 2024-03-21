@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
@@ -7,8 +9,25 @@ public class Ship : MonoBehaviour
     [SerializeField] private Vector2Int _size = Vector2Int.one;
     [SerializeField] private bool _isVerticalDirection = false;
 
+    private Button _button;
 
     public Vector2Int Size => _size;
+
+    private void OnEnable()
+    {
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnClickedButtonShip);
+    }
+
+    private void OnDisable()
+    {
+        _button.onClick.RemoveListener(OnClickedButtonShip);
+    }
+
+    private void OnClickedButtonShip()
+    {
+        Debug.Log($"You selected {gameObject.name} ship");
+    }
 
     public void ChangeDirection()
     {
@@ -19,7 +38,7 @@ public class Ship : MonoBehaviour
         _size.y = tempX;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         for (int x = 0; x < _size.x; x++)
         {
