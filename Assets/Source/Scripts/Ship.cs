@@ -4,48 +4,45 @@ using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
-    private const float YSize = 0.1f;
-
     [SerializeField] private Vector2Int _size = Vector2Int.one;
-    [SerializeField] private bool _isVerticalDirection = false;
 
-    private Button _button;
+    private SpriteRenderer _render;
+    private Color _defaultColor;
 
     public Vector2Int Size => _size;
 
-    private void OnEnable()
+    private void Awake()
     {
-        _button = GetComponent<Button>();
-        _button.onClick.AddListener(OnClickedButtonShip);
-    }
-
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(OnClickedButtonShip);
-    }
-
-    private void OnClickedButtonShip()
-    {
-        Debug.Log($"You selected {gameObject.name} ship");
+        _render = GetComponent<SpriteRenderer>();
+        _defaultColor = _render.color;
     }
 
     public void ChangeDirection()
     {
         int tempX = _size.x;
 
-        _isVerticalDirection = !_isVerticalDirection;
+        if (_size.x > _size.y)
+            transform.rotation = Quaternion.AngleAxis(-90, Vector3.forward);
+        else
+            transform.rotation = Quaternion.identity;
+
         _size.x = _size.y;
         _size.y = tempX;
     }
 
-    private void OnDrawGizmosSelected()
+    public void ChangeColor(Color color)
     {
-        for (int x = 0; x < _size.x; x++)
-        {
-            for (int y = 0; y < _size.y; y++)
-            {
-                Gizmos.DrawCube(transform.position, new Vector3(x, YSize, y));
-            }
-        }
+        if (color == Color.white)
+            _render.color = _defaultColor;
+
+        _render.color = color;
+    }
+
+    public bool IsHorizontalDirection()
+    {
+        if (_size.x > _size.y)
+            return true;
+
+        return false;
     }
 }

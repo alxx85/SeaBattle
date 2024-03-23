@@ -11,8 +11,8 @@ public class EnemyField : Fields
         {
             Vector2Int clickPosition = GetMouseClickPosition(Input.mousePosition, offset);
 
-            if (clickPosition.x >= 0 & clickPosition.x < 10)
-                if (clickPosition.y >= 0 & clickPosition.y < 10)
+            //if (clickPosition.x >= 0 & clickPosition.x < 10)
+            //    if (clickPosition.y >= 0 & clickPosition.y < 10)
                     Debug.Log($"Click point: {clickPosition}");
         }
     }
