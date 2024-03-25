@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _usedSeaPositions: []
+  _savePlaced: {fileID: 11400000, guid: eb3b129a3b03cf048a1ec257de4236fe, type: 2}
 --- !u!1 &111640580
 GameObject:
   m_ObjectHideFlags: 0

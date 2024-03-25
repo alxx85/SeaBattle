@@ -33,6 +33,8 @@ public class ViewLine : MonoBehaviour
         _button.onClick.AddListener(StartPlacingShip);
     }
 
+    public int GetCount() => _count;
+
     private void StartPlacingShip()
     {
         if (_count > 0)

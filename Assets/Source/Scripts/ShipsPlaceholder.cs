@@ -1,16 +1,21 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipsPlaceholder : MonoBehaviour
 {
     [SerializeField] private List<Vector2Int> _usedSeaPositions;
+    [SerializeField] private SavePlacedShips _savePlayerPlaced;
 
     private Ship _selectedShip;
     private bool _canPlace;
 
     public event Action PlacedShip;
+
+    private void Start()
+    {
+        _savePlayerPlaced.Reset();
+    }
 
     private void Update()
     {
@@ -26,6 +31,8 @@ public class ShipsPlaceholder : MonoBehaviour
                 _selectedShip.ChangeColor(Color.white);
                 AddUsedSeaPosition(_selectedShip);
                 PlacedShip.Invoke();
+                Vector2Int ShipPosition = new Vector2Int((int)_selectedShip.transform.position.x, (int)_selectedShip.transform.position.y);
+                _savePlayerPlaced.AddPlacedShip(_selectedShip, ShipPosition, _selectedShip.IsHorizontalDirection());
                 _selectedShip = null;
             }
         }

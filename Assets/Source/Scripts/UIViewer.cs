@@ -39,5 +39,22 @@ public class UIViewer : MonoBehaviour
     private void OnShipPlaced()
     {
         _viewer[_selectedShip].ShipPlaced();
+
+        if (IsEndedPlacing())
+        {
+            Debug.Log("All ships placed in field!");
+        }
+    }
+
+    private bool IsEndedPlacing()
+    {
+        int needPlcing = 0;
+
+        foreach (var line in _viewer.Values)
+        {
+            needPlcing += line.GetCount();
+        }
+
+        return needPlcing == 0 ? true : false;
     }
 }
