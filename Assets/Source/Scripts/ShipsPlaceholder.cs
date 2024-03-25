@@ -5,20 +5,15 @@ using UnityEngine;
 
 public class ShipsPlaceholder : MonoBehaviour
 {
-    [SerializeField] private Ship _template;
-    [SerializeField] private GameObject _ship_3;
-
     [SerializeField] private List<Vector2Int> _usedSeaPositions;
+
     private Ship _selectedShip;
-    private bool _shipIsHorizontalDirection;
     private bool _canPlace;
 
+    public event Action PlacedShip;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            _ship_3.transform.position = new Vector3(9, 9, 0);
-
         if (_selectedShip != null)
         {
             PlacingView();
@@ -30,9 +25,19 @@ public class ShipsPlaceholder : MonoBehaviour
             {
                 _selectedShip.ChangeColor(Color.white);
                 AddUsedSeaPosition(_selectedShip);
+                PlacedShip.Invoke();
                 _selectedShip = null;
             }
         }
+    }
+
+    public void SelectedShip(Ship _template)
+    {
+        if (_selectedShip != null)
+            Destroy(_selectedShip.gameObject);
+
+        var ship = Instantiate(_template.gameObject);
+        _selectedShip = ship.GetComponent<Ship>();
     }
 
     private void AddUsedSeaPosition(Ship selectedShip)
@@ -74,12 +79,6 @@ public class ShipsPlaceholder : MonoBehaviour
 
         _canPlace = TryPlacing(currentPosition, _selectedShip);
         _selectedShip.ChangeColor(_canPlace ? Color.green : Color.red);
-    }
-
-    public void SelectedShip()
-    {
-        var ship = Instantiate(_template.gameObject);
-        _selectedShip = ship.GetComponent<Ship>();
     }
 
     private bool TryPlacing(Vector2 position, Ship ship)

@@ -21,7 +21,7 @@ public class Ship : MonoBehaviour
     {
         int tempX = _size.x;
 
-        if (_size.x > _size.y)
+        if (transform.rotation.z == 0)
             transform.rotation = Quaternion.AngleAxis(-90, Vector3.forward);
         else
             transform.rotation = Quaternion.identity;
@@ -40,7 +40,7 @@ public class Ship : MonoBehaviour
 
     public bool IsHorizontalDirection()
     {
-        if (_size.x > _size.y)
+        if (transform.rotation.z == 0)
             return true;
 
         return false;
