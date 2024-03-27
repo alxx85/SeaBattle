@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: {x: 2, y: 1}
-  _isVerticalDirection: 0
+  _template: {fileID: 8853997406670502816}

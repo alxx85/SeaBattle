@@ -43,7 +43,7 @@ public class ShipsPlaceholder : MonoBehaviour
         if (_selectedShip != null)
             Destroy(_selectedShip.gameObject);
 
-        var ship = Instantiate(_template.gameObject);
+        var ship = Instantiate(_template.gameObject, transform);
         _selectedShip = ship.GetComponent<Ship>();
     }
 

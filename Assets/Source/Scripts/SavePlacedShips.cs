@@ -7,27 +7,31 @@ public class SavePlacedShips : ScriptableObject
 {
     [SerializeField] private List<PlacedShip> _shipsList;
 
+    private Dictionary<Ship, PlacedShip> _shipsDict = new Dictionary<Ship, PlacedShip>();
+
     public void AddPlacedShip(Ship ship, Vector2Int position, bool isHorizontal)
     {
-        PlacedShip placed = new PlacedShip(ship, position, isHorizontal);
+        PlacedShip placed = new PlacedShip(ship.Template, position, isHorizontal);
+        _shipsDict.Add(ship, placed);
         _shipsList.Add(placed);
     }
 
     public void Reset() => _shipsList.Clear();
 
     public List<PlacedShip> GetPlacedList() => _shipsList;
+    public Dictionary<Ship, PlacedShip> GetPlacedDict() => _shipsDict;
 }
 
 [Serializable]
 public class PlacedShip
 {
-    public Ship _ship { get; private set; }
+    public GameObject _shipTemplate { get; private set; }
     public Vector2Int _position { get; private set; }
     public bool _isHorizontalDirection { get; private set; }
 
-    public PlacedShip(Ship ship, Vector2Int position, bool isHorizontalDirection)
+    public PlacedShip(GameObject ship, Vector2Int position, bool isHorizontalDirection)
     {
-        _ship = ship;
+        _shipTemplate = ship;
         _position = position;
         _isHorizontalDirection = isHorizontalDirection;
     }

@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour
 {
     [SerializeField] private Vector2Int _size = Vector2Int.one;
+    [SerializeField] private GameObject _template;
 
     private SpriteRenderer _render;
     private Color _defaultColor;
 
     public Vector2Int Size => _size;
+    public GameObject Template => _template;
 
     private void Awake()
     {

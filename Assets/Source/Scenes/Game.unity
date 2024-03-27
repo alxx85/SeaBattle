@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _usedSeaPositions: []
-  _savePlaced: {fileID: 11400000, guid: eb3b129a3b03cf048a1ec257de4236fe, type: 2}
+  _savePlayerPlaced: {fileID: 11400000, guid: eb3b129a3b03cf048a1ec257de4236fe, type: 2}
 --- !u!1 &111640580
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placeholder: {fileID: 58273305}
+  _gameFields: {fileID: 111640581}
 --- !u!1 &310465429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1009,7 @@ Transform:
   m_GameObject: {fileID: 665795463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -6.5, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1078,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a77356e1bd76408e197fcbe9cd576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 3}
+  offset: {x: 12, y: 9}
 --- !u!1 &726227559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0}
+  _playerSavedShip: {fileID: 0}
 --- !u!212 &808002755
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1678,7 +1680,7 @@ Transform:
   m_GameObject: {fileID: 1460200059}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.5, y: -6.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1696,7 +1698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98bb397cad068d4aa12edead129a7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
+  offset: {x: 0, y: 9}
+  _playerSavedShip: {fileID: 11400000, guid: eb3b129a3b03cf048a1ec257de4236fe, type: 2}
 --- !u!1 &1492584397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,11 +2156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8155302155454010036, guid: d68e5334ebd829540960963360d8a615, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8155302155454010036, guid: d68e5334ebd829540960963360d8a615, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8155302155454010036, guid: d68e5334ebd829540960963360d8a615, type: 3}
       propertyPath: m_LocalPosition.z

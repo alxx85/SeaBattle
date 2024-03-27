@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIViewer : MonoBehaviour
 {
     [SerializeField] private ShipsPlaceholder _placeholder;
+    [SerializeField] private Transform _gameFields;
 
     private Dictionary<Ship, ViewLine> _viewer = new Dictionary<Ship, ViewLine>();
     private Ship _selectedShip;
@@ -42,19 +43,26 @@ public class UIViewer : MonoBehaviour
 
         if (IsEndedPlacing())
         {
-            Debug.Log("All ships placed in field!");
+            Invoke(nameof(StartGame), 1f);
         }
     }
 
     private bool IsEndedPlacing()
     {
-        int needPlcing = 0;
+        int needPlacing = 0;
 
         foreach (var line in _viewer.Values)
         {
-            needPlcing += line.GetCount();
+            needPlacing += line.GetCount();
         }
 
-        return needPlcing == 0 ? true : false;
+        return needPlacing == 0 ? true : false;
+    }
+
+    private void StartGame()
+    {
+        _placeholder.gameObject.SetActive(false);
+        _gameFields.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
