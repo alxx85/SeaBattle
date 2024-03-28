@@ -23,7 +23,7 @@ public class SelfField : Fields
                 Vector2 shipPosition = placedShips[ship]._position;
                 Quaternion shipRotation = placedShips[ship]._isHorizontalDirection ? Quaternion.identity : Quaternion.AngleAxis(-90, Vector3.forward);
 
-                var newShip = Instantiate(placedShips[ship]._shipTemplate, shipPosition, shipRotation, transform);
+                var newShip = Instantiate(ship, shipPosition, Quaternion.identity, transform);
             }
         }
     }

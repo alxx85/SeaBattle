@@ -5,17 +5,16 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour
 {
     [SerializeField] private Vector2Int _size = Vector2Int.one;
-    [SerializeField] private GameObject _template;
+    [SerializeField] private Transform _viewModel;
 
     private SpriteRenderer _render;
     private Color _defaultColor;
 
     public Vector2Int Size => _size;
-    public GameObject Template => _template;
 
     private void Awake()
     {
-        _render = GetComponent<SpriteRenderer>();
+        _render = GetComponentInChildren<SpriteRenderer>();
         _defaultColor = _render.color;
     }
 
@@ -23,10 +22,16 @@ public class Ship : MonoBehaviour
     {
         int tempX = _size.x;
 
-        if (transform.rotation.z == 0)
-            transform.rotation = Quaternion.AngleAxis(-90, Vector3.forward);
+        if (_viewModel.rotation.z == 0)
+        {
+            _viewModel.rotation = Quaternion.AngleAxis(-90, Vector3.forward);
+            _viewModel.localPosition = Vector2.up;
+        }
         else
-            transform.rotation = Quaternion.identity;
+        {
+            _viewModel.rotation = Quaternion.identity;
+            _viewModel.localPosition = Vector2.zero;
+        }
 
         _size.x = _size.y;
         _size.y = tempX;
@@ -42,7 +47,7 @@ public class Ship : MonoBehaviour
 
     public bool IsHorizontalDirection()
     {
-        if (transform.rotation.z == 0)
+        if (_viewModel.rotation.z == 0)
             return true;
 
         return false;

@@ -50,39 +50,24 @@ public class ShipsPlaceholder : MonoBehaviour
     private void AddUsedSeaPosition(Ship selectedShip)
     {
         for (int x = -1; x < selectedShip.Size.x + 1; x++)
-        {
-            if (selectedShip.IsHorizontalDirection())
-            {
-                for (int y = -1; y < selectedShip.Size.y + 1; y++)
-                    AddUsedPosition(selectedShip, x, y);
-            }
-            else 
-            {
-                for (int y = 0; y < selectedShip.Size.y + 2; y++)
-                    AddUsedPosition(selectedShip, x, y);
-            }
-            
-        }
+            for (int y = -1; y < selectedShip.Size.y + 1; y++)
+                AddUsedPosition(x, y, selectedShip.transform.position);
     }
 
-    private void AddUsedPosition(Ship selectedShip, int x, int y)
+    private void AddUsedPosition(int x, int y, Vector2 shipPosition)
     {
-        Vector2Int position = new Vector2Int((int)selectedShip.transform.position.x, (int)selectedShip.transform.position.y);
+        Vector2Int position = new Vector2Int((int)shipPosition.x, (int)shipPosition.y);
         position += new Vector2Int(x, -y);
 
         if (_usedSeaPositions.Contains(position) == false)
             _usedSeaPositions.Add(position);
     }
-
     private void PlacingView()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 currentPosition = new Vector2((int)position.x, (int)position.y);
 
-        if (_selectedShip.IsHorizontalDirection())
-            _selectedShip.transform.position = currentPosition;
-        else
-            _selectedShip.transform.position = currentPosition + Vector2.up;
+        _selectedShip.transform.position = currentPosition;
 
         _canPlace = TryPlacing(currentPosition, _selectedShip);
         _selectedShip.ChangeColor(_canPlace ? Color.green : Color.red);
@@ -103,10 +88,7 @@ public class ShipsPlaceholder : MonoBehaviour
             }
         }
 
-        if (ship.IsHorizontalDirection() == false)
-        {
-            changedPosition -= ship.Size.y - 1;
-        }
+        changedPosition -= ship.Size.y - 1;
 
         if (position.x >= 0 && position.x + ship.Size.x <= 10)
             if (changedPosition >= 0 && position.y < 10)
